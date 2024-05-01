@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "606821217711",
+    "project_id": "quizfinity-614d5",
+    "storage_bucket": "quizfinity-614d5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:606821217711:android:dafe5eb0e33542749a6b5a",
+        "android_client_info": {
+          "package_name": "com.wa2goose.quizfinity"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVRBYc0kTYERREEz10d12EauTj9auCIHQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
