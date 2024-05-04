@@ -21,7 +21,7 @@ const SignUpScreen = () => {
   const navigation = useNavigation()
 
   const handleReset = async () => {
-    await removeItem({key: 'onboarded'})
+    // await removeItem({key: 'onboarded'})
     navigation.navigate('Onboarding') 
   }
 
@@ -37,7 +37,7 @@ const SignUpScreen = () => {
         username: username,
       })
 
-      await storeItem({key: 'loggedIn', value: '1'})
+      // await storeItem({key: 'loggedIn', value: '1'})
       navigation.navigate('ButtomTab')
     } catch (error) {
       console.error('Error signing up:', error);

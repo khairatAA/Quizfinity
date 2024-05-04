@@ -4,6 +4,7 @@ import Colors from '../constants/Colors';
 import WelcomeHeader from '../components/HomeScreen/WelcomeHeader';
 import UserRanking from '../components/HomeScreen/UserRanking';
 import { StatusBar } from 'expo-status-bar';
+import QuizCategories from '../components/HomeScreen/QuizCategories';
 
 const HomeScreen = () => {
   return (
@@ -11,6 +12,7 @@ const HomeScreen = () => {
       <StatusBar style='auto' />
       <WelcomeHeader />
       <UserRanking />
+      <QuizCategories />
     </View>
   )
 }
@@ -20,9 +22,9 @@ export default HomeScreen
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 20,
+    // paddingHorizontal: 20,
     paddingVertical: 60,
-    backgroundColor: Colors.light.primary100,
+    backgroundColor: Colors.light.primary200,
     gap: 30,
   },
 })

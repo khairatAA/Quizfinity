@@ -4,45 +4,47 @@ import { AntDesign } from '@expo/vector-icons';
 import Colors from '../../constants/Colors';
 import {getDoc, doc} from 'firebase/firestore';
 import { FIREBASE_DB, FIREBASE_AUTH } from '../../firebaseConfig';
+import { useFocusEffect } from '@react-navigation/native';
 
 const WelcomeHeader = () => {
     const [userDetails, setUserDetails] = useState<any | null>(null)
 
     const getUserDetails = async () => {
-        try { 
-            const user = FIREBASE_AUTH.currentUser;
-            if (user) {
-                const userId = user.uid; // Get the user ID
-                const userDocRef = doc(FIREBASE_DB, 'users', userId);
-                const userDocSnap = await getDoc(userDocRef);
-                if (userDocSnap.exists()) {
-                    const userData = userDocSnap.data();
-                    setUserDetails(userData);
-                    
-                } else {
-                    console.log('User document not found');
-                }
-            } else {
-            console.log('No user is currently logged in');
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    };
+      try { 
+          const user = FIREBASE_AUTH.currentUser;
+          if (user) {
+              const userId = user.uid; // Get the user ID
+              const userDocRef = doc(FIREBASE_DB, 'users', userId);
+              const userDocSnap = await getDoc(userDocRef);
+              if (userDocSnap.exists()) {
+                  const userData = userDocSnap.data();
+                  setUserDetails(userData);
+                  
+              } else {
+                  console.log('User document not found');
+              }
+          } else {
+          console.log('No user is currently logged in');
+          }
+      } catch (error) {
+          console.log(error);
+      }
+  };
+  
+  useFocusEffect(
+    React.useCallback(() => {
+      getUserDetails();
+    }, []) // Dependency array is empty, so the effect runs only once when the component mounts
+  );
 
-    useEffect(() => {
-        getUserDetails();
-        console.log('User Details: ', userDetails)
-    }, []);
-
-    const shortUsername = userDetails ? userDetails.username.substring(0, 10) + (userDetails.username.length > 10 ? '...' : '') : '';
+  const shortUsername = userDetails ? userDetails.username.substring(0, 10) + (userDetails.username.length > 10 ? '...' : '') : '';
 
   return (
     <>
     {/* Header */}
     <View style={styles.headerContainer}>
         <View style={styles.headerTextContainer}>
-        <Text style={styles.headerName}>{userDetails ? `Hi, ${shortUsername}` : 'User'}</Text>
+        <Text style={styles.headerName}>{userDetails ? `Hi, ${shortUsername}` : 'Hi, User'}</Text>
         <Text style={styles.headerText}>Let's make this day productive</Text>
         </View>
         <View style={styles.headerUserIcon}>
@@ -76,7 +78,8 @@ const styles = StyleSheet.create({
     headerContainer: {
       flexDirection: 'row',
       alignItems: 'center',
-      justifyContent:'space-between'
+      justifyContent:'space-between',
+      paddingHorizontal: 20,
     },
     headerTextContainer: {
       gap: 3,

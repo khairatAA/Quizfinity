@@ -1,5 +1,5 @@
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, Alert } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import RegisterInterface from '../components/ui/RegisterInferface'
 import { useNavigation } from '@react-navigation/native'
 import { getItem, removeItem, storeItem } from '../utilis/asyncStorage'
@@ -11,20 +11,21 @@ import { FIREBASE_AUTH } from '../firebaseConfig'
 import CustomInput from '../components/CustomInput/CustomInput'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 
-const LoginScreen = () => {
+
+const LoginScreen = ({ isLoggedIn }:any) => {
   const { control, handleSubmit, formState: {errors} } = useForm();
   const navigation = useNavigation()
-
+  
   const handleReset = async () => {
-    await removeItem({key: 'onboarded'})
+    // await removeItem({key: 'onboarded'})
     navigation.navigate('Onboarding') 
   }
 
   const onLoginPress = async ({ email, password }: any) => {
     try {
       const userCredential = await signInWithEmailAndPassword(FIREBASE_AUTH, email, password)
-      
-      await storeItem({key: 'loggedIn', value: '1'})
+      isLoggedIn = true;
+      // await storeItem({key: 'loggedIn', value: '1'})
       navigation.navigate('ButtomTab')
     } catch (error) {
       console.error('Error signing up:', error);

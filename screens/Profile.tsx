@@ -51,11 +51,12 @@ const Profile = () => {
 
   const handleSignOut = async () => {
     try {
-      await removeItem({key: 'loggedIn'})
-      
       await signOut(FIREBASE_AUTH)
-      console.log('Remove log in status: ', await getItem({key: 'loggedIn'}));
-      navigation.navigate('LogIn')
+      // await removeItem({key: 'loggedIn'})
+      // await removeItem({key: 'onboarded'})
+      // console.log('Remove log in status: ', await getItem({key: 'loggedIn'}));
+      // console.log('Remove onboarded in status: ', await getItem({key: 'onboarded'}));
+      navigation.navigate('Onboarding')
     } catch (error) {
       console.log(error);
       Alert.alert('Error', 'Failed to Sign Out. Please try again.'); 

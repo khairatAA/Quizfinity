@@ -5,31 +5,34 @@ import Colors from '../../constants/Colors';
 
 const UserRanking = () => {
   return (
-    <>
-    <View style={styles.rankingContainer}>
-        <View style={[styles.ranking, styles.rightBorder]}>
-        <Image source={require('../../assets/icons/cup.png')} style={styles.RankIcon} />
-        <View>
-            <Text style={styles.rankingText}>Ranking</Text>
-            <Text style={styles.score}>000</Text>
-        </View>
-        </View>
+    <View style={styles.container}>
+      <View style={styles.rankingContainer}>
+          <View style={[styles.ranking, styles.rightBorder]}>
+          <Image source={require('../../assets/icons/cup.png')} style={styles.RankIcon} />
+          <View>
+              <Text style={styles.rankingText}>Ranking</Text>
+              <Text style={styles.score}>000</Text>
+          </View>
+          </View>
 
-        <View style={styles.ranking}>
-        <Coins style={styles.PointsIcon} />
-        <View>
-            <Text style={styles.rankingText}>Points</Text>
-            <Text style={styles.score}>000</Text>
-        </View>
-        </View>
+          <View style={styles.ranking}>
+          <Coins style={styles.PointsIcon} />
+          <View>
+              <Text style={styles.rankingText}>Points</Text>
+              <Text style={styles.score}>000</Text>
+          </View>
+          </View>
+      </View>
     </View>
-    </>
   )
 }
 
 export default UserRanking
 
 const styles = StyleSheet.create({
+    container: {
+      paddingHorizontal: 20,
+    },
     rankingContainer: {
       flexDirection: 'row',
       alignItems: 'center',
@@ -40,7 +43,7 @@ const styles = StyleSheet.create({
       shadowOffset: { width: 0, height: 1 },
       shadowOpacity: 0.4,
       shadowRadius: 2,  
-      // elevation: 5
+      elevation: 5,
     },
     rightBorder:{
       borderRightWidth: 1,

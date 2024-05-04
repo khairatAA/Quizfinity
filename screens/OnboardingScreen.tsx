@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Dimensions, Image, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import Onboarding from 'react-native-onboarding-swiper';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
@@ -14,7 +14,7 @@ const OnboardingScreen = () => {
   const navigation = useNavigation();
 
   const handleDone = async () => {
-    await storeItem({key: 'onboarded', value: '1'})
+    // await storeItem({key: 'onboarded', value: '1'})
     navigation.navigate('SignUp');
   }
 

@@ -31,7 +31,6 @@ export default function App() {
   // If fonts are loaded or there's an error, render the main application content
   return (
     <View style={styles.container} onLayout={onLayoutRootView}>
-
       <AppNavigation />
     </View>
   );
