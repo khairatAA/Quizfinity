@@ -10,7 +10,6 @@ export const quizCategoriesArray = [
       onPress: () => {
         // Functionality for when Category 1 is pressed
         console.log('Clicked');
-        
       }
     },
     {

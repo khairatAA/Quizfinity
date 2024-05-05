@@ -7,6 +7,7 @@ import LoginScreen from '../screens/LoginScreen';
 // import { getItem } from '../utilis/asyncStorage';
 import { View, Text } from 'react-native';
 import ButtomTab from '../ButtonTab/ButtomTab';
+import QuizLevels from '../screens/QuizLevels';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +22,7 @@ const AppNavigation = () => {
         <Stack.Screen name="SignUp" options={{ headerShown: false }} component={SignUpScreen} />
         <Stack.Screen name="LogIn" options={{ headerShown: false }} component={LoginScreen} />
         <Stack.Screen name="ButtomTab" options={{ headerShown: false }} component={ButtomTab} />
+        <Stack.Screen name="QuizLevels" options={{ headerShown: false }} component={QuizLevels} />
       </Stack.Navigator>
     </NavigationContainer>
   );

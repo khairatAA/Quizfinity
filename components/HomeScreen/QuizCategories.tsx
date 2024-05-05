@@ -2,24 +2,28 @@ import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Dimensions, FlatL
 import React, { useEffect } from 'react'
 import { quizCategoriesArray } from './QuizCategoryArray'
 import Colors from '../../constants/Colors';
-import Animated, { FadeIn, FadeInDown, FadeInUp, FadeOut } from 'react-native-reanimated';
+import Animated, { FadeInDown, FadeInUp, ZoomInLeft } from 'react-native-reanimated';
+import { useNavigation } from '@react-navigation/native';
 
 const { width } = Dimensions.get('window');
 
 const QuizCategories = () => {
+    const navigation = useNavigation()
 
     const renderItem = ({ item }: any) => {
 
         return(
-            <TouchableOpacity key={item.id} onPress={item.onPress} style={styles.categoryContainer}>
-                <Animated.View entering={FadeInUp.springify(5000)} style={styles.CategoryImage}>
-                    {item.image}
-                </Animated.View>
-                <View style={styles.CategoryTexts}>
-                    <Text style={styles.CategoryName}>{item.name}</Text>
-                    <Text style={styles.CategoryLevel}>{item.numberOfLevels} Levels</Text>
-                </View>
-            </TouchableOpacity>
+            <Animated.View entering={ZoomInLeft.duration(1000).delay(300)} style={styles.categoryContainer}>
+                <TouchableOpacity key={item.id} onPress={() => {navigation.navigate('QuizLevels')}}>
+                    <View style={styles.CategoryImage}>
+                        {item.image}
+                    </View>
+                    <View style={styles.CategoryTexts}>
+                        <Text style={styles.CategoryName}>{item.name}</Text>
+                        <Text style={styles.CategoryLevel}>{item.numberOfLevels} Levels</Text>
+                    </View>
+                </TouchableOpacity>
+            </Animated.View>
         )
     };
     

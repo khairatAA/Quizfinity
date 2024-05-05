@@ -5,6 +5,7 @@ import Colors from '../../constants/Colors';
 import {getDoc, doc} from 'firebase/firestore';
 import { FIREBASE_DB, FIREBASE_AUTH } from '../../firebaseConfig';
 import { useFocusEffect } from '@react-navigation/native';
+import Animated, { FadeInDown, FadeInUp, ZoomIn } from 'react-native-reanimated';
 
 const WelcomeHeader = () => {
     const [userDetails, setUserDetails] = useState<any | null>(null)
@@ -44,7 +45,11 @@ const WelcomeHeader = () => {
     {/* Header */}
     <View style={styles.headerContainer}>
         <View style={styles.headerTextContainer}>
-        <Text style={styles.headerName}>{userDetails ? `Hi, ${shortUsername}` : 'Hi, User'}</Text>
+
+        <Animated.View entering={ZoomIn.duration(1000)}>
+          <Text style={styles.headerName}>{userDetails ? `Hi, ${shortUsername}` : 'Hi, User'}</Text>
+        </Animated.View>
+
         <Text style={styles.headerText}>Let's make this day productive</Text>
         </View>
         <View style={styles.headerUserIcon}>
