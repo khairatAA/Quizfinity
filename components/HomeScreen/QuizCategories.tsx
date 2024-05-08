@@ -14,7 +14,14 @@ const QuizCategories = () => {
 
         return(
             <Animated.View entering={ZoomInLeft.duration(1000).delay(300)} style={styles.categoryContainer}>
-                <TouchableOpacity key={item.id} onPress={() => {navigation.navigate('QuizLevels')}}>
+                <TouchableOpacity
+                key={item.id}
+                onPress={
+                    () => {navigation.navigate(
+                        'QuizLevels',
+                        { category: item.name, numberOfLevels: item.numberOfLevels, levelDetails: item.levelDetails }
+                        )}}
+                >
                     <View style={styles.CategoryImage}>
                         {item.image}
                     </View>
