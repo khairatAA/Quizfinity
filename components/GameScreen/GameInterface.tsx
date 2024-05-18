@@ -143,9 +143,10 @@ const GameInterface = ({ route }: any) => {
         setCurrentQuestionIndex(currentQuestionIndex + 1);
         setOptions(generateOptionsAndShuffle(questions[currentQuestionIndex + 1]));
         setAnsweredCorrectly(false);
-      } else {
-        handleResultPress()
-      }
+      } 
+      // else {
+      //   handleResultPress()
+      // }
     }
     
 

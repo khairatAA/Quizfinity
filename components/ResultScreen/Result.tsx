@@ -37,9 +37,9 @@ const Result = ({ route }: any) => {
     
                     if (categoryDocSnap.exists()) {
                         const levelData = categoryDocSnap.data();
-                        const currentScore = levelData[level] || 0;
-                        const newScore = currentScore + score;
-                        await updateDoc(categoryDocRef, { [level]: newScore });
+                        // const currentScore = levelData[level] || 0;
+                        // const newScore = currentScore + score;
+                        await updateDoc(categoryDocRef, { [level]: score });
                     } else {
                         // If the subcollection does not exist, create it and set the score for the corresponding level
                         await setDoc(categoryDocRef, { [level]: score });

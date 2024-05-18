@@ -1,9 +1,55 @@
 import { View, Text, StyleSheet, Image } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Coins } from '../../assets/icons/index';
 import Colors from '../../constants/Colors';
+import { FIREBASE_AUTH } from '../../firebaseConfig'
+import {FIREBASE_DB} from '../../firebaseConfig'
+import { doc, getDoc, collection, getDocs } from 'firebase/firestore';
+import { useFocusEffect } from '@react-navigation/native';
 
 const UserRanking = () => {
+  const [totalPoints, setTotalPoints] = useState(0);
+
+  const handleScoreRetrieval = async () => {
+    try {
+      const user = FIREBASE_AUTH.currentUser;
+      if (user) {
+        const userId = user.uid;
+        const userDocRef = doc(FIREBASE_DB, 'users', userId);
+        const userDocSnap = await getDoc(userDocRef);
+
+        if (userDocSnap.exists()) {
+          const categoriesCollectionRef = collection(FIREBASE_DB, 'users', userId, 'game_categories');
+          const categoriesSnapshot = await getDocs(categoriesCollectionRef);
+          
+          let totalScore = 0;
+
+          categoriesSnapshot.forEach((doc) => {
+            const categoryData = doc.data();
+            
+            Object.keys(categoryData).forEach((level) => {
+              totalScore += categoryData[level];
+            });
+          });
+
+          setTotalPoints(totalScore);
+        } else {
+          console.log('User document not found');
+        }
+      } else {
+        console.log('No user is currently logged in');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useFocusEffect(
+    React.useCallback(() => {
+      handleScoreRetrieval()
+    }, [])
+  );
+
   return (
     <View style={styles.container}>
       <View style={styles.rankingContainer}>
@@ -19,7 +65,7 @@ const UserRanking = () => {
           <Coins style={styles.PointsIcon} />
           <View>
               <Text style={styles.rankingText}>Points</Text>
-              <Text style={styles.score}>000</Text>
+              <Text style={styles.score}>{totalPoints}</Text>
           </View>
           </View>
       </View>

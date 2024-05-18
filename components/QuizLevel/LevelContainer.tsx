@@ -10,11 +10,11 @@ const LevelContainer = ({ route }: any) => {
 
     const renderItem = ({ item }: any) => (
       <Animated.View entering={ZoomInLeft.duration(1000).delay(300 * item.id)}>
-          <LevelContainerUI levelName={item.level_number} onPress={() => {
+          <LevelContainerUI levelName={item.level_number} category={category} onPress={() => {
             navigation.navigate('QuizInstruction', {levelNumber: item.level_number, category: category, levelDetails: levelDetails});
           }} />
       </Animated.View>
-      );
+      ); 
 
   return (
     <FlatList
