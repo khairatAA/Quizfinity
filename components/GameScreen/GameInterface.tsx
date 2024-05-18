@@ -82,7 +82,7 @@ const GameInterface = ({ route }: any) => {
         const fetchedQuestions = response.data.results;
       if (fetchedQuestions.length > 0) {
         setQuestions(fetchedQuestions);
-        console.log('Questions: ', fetchedQuestions);
+        // console.log('Questions: ', fetchedQuestions);
 
         setOptions(generateOptionsAndShuffle(fetchedQuestions[0]));
       } else {
@@ -124,12 +124,9 @@ const GameInterface = ({ route }: any) => {
 
     const handleSelectedOption = async (_option: string) => {
       const option = decodeURIComponent(_option)
-      console.log('Picked option', option);
 
       const correctOption = decodeURIComponent(questions[currentQuestionIndex].correct_answer);
       const isCorrect = option === correctOption;
-
-      console.log('Correct option', correctOption);
       
       if (isCorrect && !answeredCorrectly) {
         setScore(prevScore => prevScore + 10);
@@ -150,9 +147,6 @@ const GameInterface = ({ route }: any) => {
         handleResultPress()
       }
     }
-    
-
-    useEffect(() => {console.log('Score is: ', score);}, [score])
     
 
     const handleResultPress = () => {
