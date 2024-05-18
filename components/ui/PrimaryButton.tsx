@@ -4,11 +4,12 @@ import Colors from '../../constants/Colors';
 
 type PrimaryButtonTypes = {
   ButtonText: String;
-  onPress: any
+  onPress: any;
+  style?: any
 }
-const PrimaryButton = ({ButtonText, onPress}: PrimaryButtonTypes) => {
+const PrimaryButton = ({ButtonText, onPress, style}: PrimaryButtonTypes) => {
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress} >
+    <TouchableOpacity style={[styles.container, style]} onPress={onPress} >
       <Text style={styles.ButtonText}>{ButtonText}</Text>
     </TouchableOpacity>
   )

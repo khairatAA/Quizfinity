@@ -1,18 +1,19 @@
 import { FlatList, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import LevelContainerUI from './LevelContainerUI'
+import Animated, { FadeInDown, FadeInUp, ZoomInLeft } from 'react-native-reanimated';
+import { useNavigation } from '@react-navigation/native';
 
 const LevelContainer = ({ route }: any) => {
-    const { category, levelDetails } = route.params;
-
-    console.log('Category: ', category);
-    console.log('Level Details: ', levelDetails);
-    
+    const { levelDetails, category } = route.params;
+    const navigation = useNavigation()
 
     const renderItem = ({ item }: any) => (
-        <View style={{gap:20}}>
-            <LevelContainerUI levelName={item.level_number} />
-        </View>
+      <Animated.View entering={ZoomInLeft.duration(1000).delay(300 * item.id)}>
+          <LevelContainerUI levelName={item.level_number} onPress={() => {
+            navigation.navigate('QuizInstruction', {levelNumber: item.level_number, category: category, levelDetails: levelDetails});
+          }} />
+      </Animated.View>
       );
 
   return (

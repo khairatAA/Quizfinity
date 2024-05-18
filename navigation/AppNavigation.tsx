@@ -8,6 +8,9 @@ import LoginScreen from '../screens/LoginScreen';
 import { View, Text } from 'react-native';
 import ButtomTab from '../ButtonTab/ButtomTab';
 import QuizLevels from '../screens/QuizLevels';
+import QuizInstructionScreen from '../screens/QuizInstructionScreen';
+import QuizScreen from '../screens/QuizScreen';
+import ResultsScreen from '../screens/ResultsScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,6 +26,9 @@ const AppNavigation = () => {
         <Stack.Screen name="LogIn" options={{ headerShown: false }} component={LoginScreen} />
         <Stack.Screen name="ButtomTab" options={{ headerShown: false }} component={ButtomTab} />
         <Stack.Screen name="QuizLevels" options={{ headerShown: false }} component={QuizLevels} />
+        <Stack.Screen name="QuizInstruction" options={{ headerShown: false }} component={QuizInstructionScreen} />
+        <Stack.Screen name="QuizScreen" options={{ headerShown: false }} component={QuizScreen} />
+        <Stack.Screen name="ResultScreen" options={{ headerShown: false }} component={ResultsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

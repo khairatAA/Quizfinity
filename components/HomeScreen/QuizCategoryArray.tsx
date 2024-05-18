@@ -39,6 +39,22 @@ export const quizCategoriesArray = [
         {
           id: 0,
           level_number: 1,
+        },
+        {
+          id: 1,
+          level_number: 2,
+        },
+        {
+          id: 2,
+          level_number: 3,
+        },
+        {
+          id: 3,
+          level_number: 4,
+        },
+        {
+          id: 4,
+          level_number: 5,
         }
       ]
     },
@@ -52,6 +68,22 @@ export const quizCategoriesArray = [
             id: 0,
             level_number: 1,
 
+          },
+          {
+            id: 1,
+            level_number: 2,
+          },
+          {
+            id: 2,
+            level_number: 3,
+          },
+          {
+            id: 3,
+            level_number: 4,
+          },
+          {
+            id: 4,
+            level_number: 5,
           }
         ]
     },
@@ -65,6 +97,22 @@ export const quizCategoriesArray = [
             id: 0,
             level_number: 1,
 
+          },
+          {
+            id: 1,
+            level_number: 2,
+          },
+          {
+            id: 2,
+            level_number: 3,
+          },
+          {
+            id: 3,
+            level_number: 4,
+          },
+          {
+            id: 4,
+            level_number: 5,
           }
         ]
     },
@@ -78,6 +126,22 @@ export const quizCategoriesArray = [
             id: 0,
             level_number: 1,
 
+          },
+          {
+            id: 1,
+            level_number: 2,
+          },
+          {
+            id: 2,
+            level_number: 3,
+          },
+          {
+            id: 3,
+            level_number: 4,
+          },
+          {
+            id: 4,
+            level_number: 5,
           }
         ]
     },
@@ -91,6 +155,22 @@ export const quizCategoriesArray = [
             id: 0,
             level_number: 1,
 
+          },
+          {
+            id: 1,
+            level_number: 2,
+          },
+          {
+            id: 2,
+            level_number: 3,
+          },
+          {
+            id: 3,
+            level_number: 4,
+          },
+          {
+            id: 4,
+            level_number: 5,
           }
         ]
       },

@@ -13,7 +13,7 @@ const QuizCategories = () => {
     const renderItem = ({ item }: any) => {
 
         return(
-            <Animated.View entering={ZoomInLeft.duration(1000).delay(300)} style={styles.categoryContainer}>
+            <Animated.View entering={ZoomInLeft.duration(1000).delay(300 * item.id)} style={styles.categoryContainer}>
                 <TouchableOpacity
                 key={item.id}
                 onPress={
