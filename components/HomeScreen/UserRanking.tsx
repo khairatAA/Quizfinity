@@ -65,7 +65,7 @@ const UserRanking = () => {
           <Coins style={styles.PointsIcon} />
           <View>
               <Text style={styles.rankingText}>Points</Text>
-              <Text style={styles.score}>{totalPoints}</Text>
+              <Text style={styles.score}>{totalPoints < 99999 ? totalPoints : 'CAMP!'}</Text>
           </View>
           </View>
       </View>
