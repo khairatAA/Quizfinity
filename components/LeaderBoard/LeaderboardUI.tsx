@@ -3,34 +3,34 @@ import React from 'react'
 import { StatusBar } from 'expo-status-bar'
 import Colors from '../../constants/Colors'
 import { Podium } from '../../assets/icons'
-import SearchFeature from './SearchFeature'
+import { SearchFeature } from './SearchFeature'
 
 const LeaderboardUI = () => {
-  return (
-    <SafeAreaView style={styles.container}>
-        <StatusBar style='light' />
+    return (
+        <SafeAreaView style={styles.container}>
+            <StatusBar style='light' />
 
-        <View style={styles.leaderboardTitle}>
-            <Podium height={100} width={100} />
-            <Text style={styles.titleText}>Leaderboard</Text>
-        </View>
-        
-        <View style={styles.UsersList}>
-            <SearchFeature />
-        </View>
-    </SafeAreaView>
-  )
+            <View style={styles.leaderboardTitle}>
+                <Podium height={100} width={100} />
+                <Text style={styles.titleText}>Leaderboard</Text>
+            </View>
+
+            <View style={styles.UsersList}>
+                <SearchFeature />
+            </View>
+        </SafeAreaView>
+    )
 }
 
 export default LeaderboardUI
 
 const styles = StyleSheet.create({
-    container:{
+    container: {
         flex: 1,
         backgroundColor: '#614BF2',
-        width:'100%'
+        width: '100%'
     },
-    leaderboardTitle:{
+    leaderboardTitle: {
         backgroundColor: '#614BF2',
         padding: 25,
         alignItems: 'center',

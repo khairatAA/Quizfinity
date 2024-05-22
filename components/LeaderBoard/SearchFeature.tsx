@@ -5,6 +5,7 @@ import SearchFilter from './SearchFilter';
 import { FIREBASE_AUTH, FIREBASE_DB } from '../../firebaseConfig';
 import { collection, getDocs, query, doc, getDoc } from 'firebase/firestore';
 import { useFocusEffect } from '@react-navigation/native';
+import { onAuthStateChanged } from 'firebase/auth';
 
 export type LeaderboardEntry = {
     userId: string;
@@ -13,15 +14,19 @@ export type LeaderboardEntry = {
     profilePictureUrl: string | null;
 };
 
-const SearchFeature = () => {
+export let exportedLeaderboardData: LeaderboardEntry[] = [];
+
+export const SearchFeature = () => {
     const [input, setInput] = useState("")
     const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
     const [loading, setLoading] = useState(false);
     const [noResults, setNoResults] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
     const handleScoreRetrieval = async () => {
         setLoading(true);
         setNoResults(false);
+        setError(null);
 
         try {
             const usersQuery = query(collection(FIREBASE_DB, 'users'));
@@ -48,20 +53,34 @@ const SearchFeature = () => {
 
             leaderboardData.sort((a, b) => b.totalPoints - a.totalPoints);
             setLeaderboard(leaderboardData);
-            setLoading(false);
+            exportedLeaderboardData = leaderboardData;
 
             if (leaderboardData.length === 0) {
                 setNoResults(true);
             }
         } catch (error) {
             console.log('Error fetching leaderboard data:', error);
+            if (error instanceof Error) {
+                setError(error.message);
+            } else {
+                setError('An unexpected error occurred');
+            }
+        } finally {
             setLoading(false);
         }
     };
 
     useFocusEffect(
         React.useCallback(() => {
-            handleScoreRetrieval()
+            const unsubscribe = onAuthStateChanged(FIREBASE_AUTH, (user) => {
+                if (user) {
+                    handleScoreRetrieval();
+                } else {
+                    setError("User is not authenticated");
+                    setLoading(false);
+                }
+            });
+            return () => unsubscribe();
         }, [])
     );
 
@@ -95,14 +114,14 @@ const SearchFeature = () => {
 
             {loading ? (
                 <ActivityIndicator size="large" color="#614BF2" />
+            ) : error ? (
+                <Text style={styles.errorText}>{error}</Text>
             ) : (
                 <SearchFilter leaderboard={leaderboard} input={input} setInput={setInput} noResults={noResults} />
             )}
         </View>
     )
 }
-
-export default SearchFeature
 
 const styles = StyleSheet.create({
     parentContainer: {
@@ -130,5 +149,12 @@ const styles = StyleSheet.create({
     },
     cancelButton: {
         marginLeft: 5,
-    }
+    },
+    errorText: {
+        color: 'red',
+        textAlign: 'center',
+        marginTop: 20,
+        fontSize: 16,
+        fontFamily: 'OpenSans-Regular',
+    },
 })
