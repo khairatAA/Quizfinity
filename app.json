@@ -1,8 +1,7 @@
 {
   "expo": {
     "name": "Quizfinity",
-    "slug": "Quizfinity",
-    "description": "Expand your mind, one question at a time.",
+    "slug": "quizfinity",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -11,6 +10,9 @@
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#D8DBFF"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": [
       "**/*"
@@ -26,7 +28,8 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#D8DBFF"
       },
-      "package": "com.wa2goose.quizfinity"
+      "package": "com.wa2goose.quizfinity",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -37,13 +40,6 @@
       [
         "expo-build-properties",
         {
-          "android": {
-            "compileSdkVersion": 34,
-            "targetSdkVersion": 34,
-            "buildToolsVersion": "34.0.0",
-            "minSdkVersion": 23,
-            "flipper": "0.99.0"
-          },
           "ios": {
             "useFrameworks": "static"
           }
@@ -52,7 +48,7 @@
     ],
     "extra": {
       "eas": {
-        "projectId": "1159daf1-2761-402b-8401-24f597a863ee"
+        "projectId": "c5d646eb-ec25-417f-b7a1-2008dac6d345"
       }
     }
   }

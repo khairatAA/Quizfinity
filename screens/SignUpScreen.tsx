@@ -28,7 +28,6 @@ const SignUpScreen = () => {
   const onSignUpPress = async ({ username, email, password }: any) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(FIREBASE_AUTH, email, password)
-      console.log('Outputting', userCredential);
 
       const uid = userCredential.user.uid
 
