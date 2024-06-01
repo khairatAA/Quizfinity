@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=reactnative,typescript,firebase,expo" />
+    <img src="https://skillicons.dev/icons?i=react,typescript,firebase,expo" />
   </a>
 </p>
 
