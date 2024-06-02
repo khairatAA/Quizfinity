@@ -45,9 +45,9 @@ Welcome to Quifinity! **[Quizfinity](https://quizfinity-showcase.vercel.app/)** 
 <p align="center">
   <img src="./assets/README_images/Home.jpeg" alt="SplashScreen" height="300">
 </p>
-- <b>Category Cards:</b>  Each category is displayed in a card were a user can select any category.
-- <b>User's Rank:</b>  Displays the User's rank on the leaderboard.
-- <b>User's Points:</b>  Displays the total points the user has earned.
+<p>- <b>Category Cards:</b>  Each category is displayed in a card were a user can select any category.</p>
+<p>- <b>User's Rank:</b>  Displays the User's rank on the leaderboard.</p>
+<p>- <b>User's Points:</b>  Displays the total points the user has earned.</p>
 
 ### Quiz Screen
 
@@ -56,15 +56,15 @@ Welcome to Quifinity! **[Quizfinity](https://quizfinity-showcase.vercel.app/)** 
   <img src="./assets/README_images/GameScreen.jpeg" alt="SplashScreen" height="300">
   <img src="./assets/README_images/Result.jpeg" alt="SplashScreen" height="300">
 </p>
-- <b>Question Display:</b> Shows the quiz question with 4 or 5 options.
-- <b>Timer: </b> Displays a countdown timer for the level:
-    - Easy: 10 minutes per level
-    - Medium: 8 minutes per level
-    - Hard: 5 minutes per level
-- <b>Post-Quiz:</b> After time elapses or the user submits their answers:
-    - Shows a "quiz over" screen indicating pass/fail status
-    - Allows progression to the next level if passed, or retrying the level if failed
-    - After completing all levels in a mode, a success page is displayed with an option to return to the list of modes.
+<p>- <b>Question Display:</b> Shows the quiz question with 4 or 5 options.</p>
+<p>- <b>Timer: </b> Displays a countdown timer for the level:</p>
+    <p>- Easy: 10 minutes per level</p>
+    <p>- Medium: 8 minutes per level</p>
+    <p>- Hard: 5 minutes per level</p>
+<p>- <b>Post-Quiz:</b> After time elapses or the user submits their answers:</p>
+    <p>- Shows a "quiz over" screen indicating pass/fail status</p>
+    <p>- Allows progression to the next level if passed, or retrying the level if failed</p>
+    <p>- After completing all levels in a mode, a success page is displayed with an option to return to the list of modes.</p>
 
 ## Technologies Used
 
