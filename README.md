@@ -87,7 +87,7 @@ Welcome to Quifinity! **[Quizfinity](https://quizfinity-showcase.vercel.app/)** 
 ## Accessibility
 
 - Website: **[Quizfinity's Website](https://quizfinity-showcase.vercel.app/)**
-- Source Code: Available in **[Github](https://quizfinity-showcase.vercel.app/)**
+- Source Code: Available in **[Github](https://github.com/khairatAA/Quizfinity)**
 - Download Quizfinity on Google Play Store: The app is accessible on Google Play Store, with a download button provided on the **[website](https://quizfinity-showcase.vercel.app/)**.
 
 ## Contact
