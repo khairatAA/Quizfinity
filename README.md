@@ -58,13 +58,16 @@ Welcome to Quifinity! **[Quizfinity](https://quizfinity-showcase.vercel.app/)** 
 </p>
 <p>- <b>Question Display:</b> Shows the quiz question with 4 or 5 options.</p>
 <p>- <b>Timer: </b> Displays a countdown timer for the level:</p>
-    <p>   - Easy: 10 minutes per level</p>
-    <p>   - Medium: 8 minutes per level</p>
-    <p>   - Hard: 5 minutes per level</p>
+
+- Easy: 10 minutes per level
+- Medium: 8 minutes per level
+- Hard: 5 minutes per level
+
 <p>- <b>Post-Quiz:</b> After time elapses or the user submits their answers:</p>
-    <p>   - Shows a "quiz over" screen indicating pass/fail status</p>
-    <p>   - Allows progression to the next level if passed, or retrying the level if failed</p>
-    <p>   - After completing all levels in a mode, a success page is displayed with an option to return to the list of modes.</p>
+
+- Shows a "quiz over" screen indicating pass/fail status.
+- Allows progression to the next level if passed, or retrying the level if failed.
+- After completing all levels in a mode, a success page is displayed with an option to return to the list of modes.
 
 ## Technologies Used
 
