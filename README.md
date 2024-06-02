@@ -12,7 +12,7 @@
 
 ## Introduction
 
-Welcome to Quifinity! **[Quizfinity](https://quizfinity-showcase.vercel.app/)** is a mobile application designed to combine learning with fun through quizzes and trivia questions on various topics such as Technology, Science, Nature, Riddles, Literacy, and more. The app is suitable for users of all age groups, making it a versatile tool for education and entertainment.
+Welcome to Quifinity! **[Quizfinity](https://quizfinity-showcase.vercel.app/)** is a mobile application designed to combine learning with fun through quizzes and trivia questions on various topics such as Technology, Science, Nature, Riddles, Literacy, and more. The app is suitable for users of all age groups, making it a versatile tool for education and entertainment. Quizfinity is accessible to all users on Google Play Store, to download the app check out **[Quizfinity's Website](https://quizfinity-showcase.vercel.app/)** then click the download button.
 
 ## Key Features (MVP)
 
@@ -83,3 +83,15 @@ Welcome to Quifinity! **[Quizfinity](https://quizfinity-showcase.vercel.app/)** 
 ### External Database for Questions
 
 - Open Trivia DB
+
+## Accessibility
+
+- Website: **[Quizfinity's Website](https://quizfinity-showcase.vercel.app/)**
+- Source Code: Available in **[Github](https://quizfinity-showcase.vercel.app/)**
+- Download Quizfinity on Google Play Store: The app is accessible on Google Play Store, with a download button provided on the **[website](https://quizfinity-showcase.vercel.app/)**.
+
+## Contact
+
+### Khairat Adesina [khairatadesina01@gmail.com](mailto:khairatadesina01@gmail.com) [LinkedIn](https://www.linkedin.com/in/khairat-adesina1234/) [X](https://twitter.com/_dedamola)
+
+For more information or support, please visit our website or contact our support team.
