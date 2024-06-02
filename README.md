@@ -18,5 +18,24 @@ Welcome to Quifinity! **[Quizfinity](https://quizfinity-showcase.vercel.app/)** 
 
 ### Splash Screen
 
-<img src="./assets/README_images/SplashScreen.png" alt="SplashScreen" height="200">
+<p align="center">
+  <img src="./assets/README_images/SplashScreen.png" alt="SplashScreen" height="300">
+</p>
 - <b>Logo Display</b>: The app's logo is displayed upon loading.
+
+### Onboarding
+
+<p align="center">
+  <img src="./assets/README_images/Onboarding1.png" alt="SplashScreen" height="300">
+  <img src="./assets/README_images/Onboarding2.png" alt="SplashScreen" height="300">
+  <img src="./assets/README_images/Onboarding3.jpeg" alt="SplashScreen" height="300">
+</p>
+- <b>Three-Page Slider</b>:  Introduces users to the app and its features, highlighting reasons to use Quizfinity.
+
+### Authentication
+
+<p align="center">
+  <img src="./assets/README_images/SignUp.jpeg" alt="SplashScreen" height="300">
+  <img src="./assets/README_images/Login.jpeg" alt="SplashScreen" height="300">
+</p>
+- <b>Email and Password:</b>:  Users can register and log in using their email addresses and passwords.
