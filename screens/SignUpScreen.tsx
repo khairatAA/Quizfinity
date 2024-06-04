@@ -1,4 +1,4 @@
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, Dimensions, Alert } from 'react-native'
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, Dimensions, Alert, ScrollView } from 'react-native'
 import React from 'react'
 import RegisterInterface from '../components/ui/RegisterInferface'
 import { useNavigation } from '@react-navigation/native'
@@ -44,81 +44,78 @@ const SignUpScreen = () => {
     }
   }
 
-  const signInWithGoogle = async () => {
-    Alert.alert('Error', 'Failed to sign in with Google. Please try signing up with your email.');
-  }
-
   return (
     <RegisterInterface onPress={handleReset} title='Sign Up' style={styles.registerationInterface}>
-      <View style={styles.form}>
-        <View style={styles.inputs}>
+      <ScrollView>
+        <View style={styles.form}>
+          <View style={styles.inputs}>
 
-          <Animated.View entering={FadeInDown.duration(1000).springify()}>
-            <CustomInput
-              control={control}
-              name='username'
-              fieldName='Username'
-              rules={{
-                required: 'Username is required', minLength: {
-                  value: 8,
-                  message: 'Username should be at least 8 characters long'
-                },
-                maxLength: {
-                  value: 24,
-                  message: 'Password should be max 20 characters long'
-                }
-              }}
-              placeholder='Khairat12345'
-              keyboardType='default'
-              autoCapitalize='none'
-            />
+            <Animated.View entering={FadeInDown.duration(1000).springify()}>
+              <CustomInput
+                control={control}
+                name='username'
+                fieldName='Username'
+                rules={{
+                  required: 'Username is required', minLength: {
+                    value: 8,
+                    message: 'Username should be at least 8 characters long'
+                  },
+                  maxLength: {
+                    value: 24,
+                    message: 'Password should be max 20 characters long'
+                  }
+                }}
+                placeholder='Khairat12345'
+                keyboardType='default'
+                autoCapitalize='none'
+              />
+            </Animated.View>
+
+            <Animated.View entering={FadeInDown.delay(200).duration(1000).springify()}>
+              <CustomInput
+                control={control}
+                name='email'
+                fieldName='Email Address'
+                rules={{
+                  required: 'Email is required',
+                  pattern: { value: /^\S+@\S+$/i, message: 'Invalid email address' }
+                }}
+                placeholder='khairat@gmail.com'
+                keyboardType='email-address'
+                autoCapitalize='none'
+              />
+            </Animated.View>
+
+            <Animated.View entering={FadeInDown.delay(200).duration(1000).springify()}>
+              <CustomInput
+                control={control}
+                name='password'
+                rules={{
+                  required: 'Password is required', minLength: {
+                    value: 8,
+                    message: 'Password should be minimum 8 characters long'
+                  }
+                }}
+                fieldName='Password'
+                placeholder='•••••••••••••'
+                secureTextEntry
+                autoCapitalize='none'
+              />
+            </Animated.View>
+          </View>
+
+          <Animated.View entering={FadeInDown.delay(400).duration(1000).springify()}>
+            <PrimaryButton onPress={handleSubmit(onSignUpPress)} ButtonText='Sign Up' />
           </Animated.View>
 
-          <Animated.View entering={FadeInDown.delay(200).duration(1000).springify()}>
-            <CustomInput
-              control={control}
-              name='email'
-              fieldName='Email Address'
-              rules={{
-                required: 'Email is required',
-                pattern: { value: /^\S+@\S+$/i, message: 'Invalid email address' }
-              }}
-              placeholder='khairat@gmail.com'
-              keyboardType='email-address'
-              autoCapitalize='none'
-            />
-          </Animated.View>
-
-          <Animated.View entering={FadeInDown.delay(200).duration(1000).springify()}>
-            <CustomInput
-              control={control}
-              name='password'
-              rules={{
-                required: 'Password is required', minLength: {
-                  value: 8,
-                  message: 'Password should be minimum 8 characters long'
-                }
-              }}
-              fieldName='Password'
-              placeholder='•••••••••••••'
-              secureTextEntry
-              autoCapitalize='none'
-            />
-          </Animated.View>
         </View>
-
-        <Animated.View entering={FadeInDown.delay(400).duration(1000).springify()}>
-          <PrimaryButton onPress={handleSubmit(onSignUpPress)} ButtonText='Sign Up' />
-        </Animated.View>
-
-      </View>
-      <LoginWithGoogle
-        InstructionText="Already have an account"
-        ActionLink='Log In'
-        handleGoogle={signInWithGoogle}
-        style={{ gap: 20 }}
-        onPress={() => navigation.navigate('LogIn')}
-      />
+        <LoginWithGoogle
+          InstructionText="Already have an account"
+          ActionLink='Log In'
+          style={{ gap: 20 }}
+          onPress={() => navigation.navigate('LogIn')}
+        />
+      </ScrollView>
     </RegisterInterface>
   )
 }

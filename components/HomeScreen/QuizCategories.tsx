@@ -12,15 +12,17 @@ const QuizCategories = () => {
 
     const renderItem = ({ item }: any) => {
 
-        return(
+        return (
             <Animated.View entering={ZoomInLeft.duration(1000).delay(300 * item.id)} style={styles.categoryContainer}>
                 <TouchableOpacity
-                key={item.id}
-                onPress={
-                    () => {navigation.navigate(
-                        'QuizLevels',
-                        { category: item.name, numberOfLevels: item.numberOfLevels, levelDetails: item.levelDetails }
-                        )}}
+                    key={item.id}
+                    onPress={
+                        () => {
+                            navigation.navigate(
+                                'QuizLevels',
+                                { category: item.name, numberOfLevels: item.numberOfLevels, levelDetails: item.levelDetails }
+                            )
+                        }}
                 >
                     <View style={styles.CategoryImage}>
                         {item.image}
@@ -33,19 +35,19 @@ const QuizCategories = () => {
             </Animated.View>
         )
     };
-    
-  return (
-    <View style={styles.container}>
-        <Text style={styles.LetPlay}>Let's Play</Text>
-        <FlatList
-            data={quizCategoriesArray}
-            renderItem={renderItem}
-            keyExtractor={item => item.id.toString()}
-            contentContainerStyle={styles.categoriesContainer}
-            numColumns={2}
-        />
-    </View>
-  )
+
+    return (
+        <View style={styles.container}>
+            <Text style={styles.LetPlay}>Let's Play</Text>
+            <FlatList
+                data={quizCategoriesArray}
+                renderItem={renderItem}
+                keyExtractor={item => item.id.toString()}
+                contentContainerStyle={styles.categoriesContainer}
+                numColumns={2}
+            />
+        </View>
+    )
 }
 
 export default QuizCategories
@@ -55,7 +57,7 @@ const styles = StyleSheet.create({
         flex: 1,
         gap: 20,
     },
-    CategoryImage:{
+    CategoryImage: {
         alignSelf: 'center',
         position: 'relative',
         top: -35,
@@ -81,7 +83,7 @@ const styles = StyleSheet.create({
         shadowColor: 'black',
         shadowOffset: { width: 0, height: 1 },
         shadowOpacity: 0.2,
-        shadowRadius: 2,  
+        shadowRadius: 2,
         elevation: 5,
     },
     CategoryTexts: {
@@ -96,5 +98,5 @@ const styles = StyleSheet.create({
         fontFamily: 'OpenSans-SemiBold',
         fontSize: 16,
     }
-    
+
 })

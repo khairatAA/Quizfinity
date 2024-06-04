@@ -1,22 +1,53 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { FIREBASE_AUTH } from '../firebaseConfig';
+import { onAuthStateChanged, User } from 'firebase/auth';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import OnboardingScreen from '../screens/OnboardingScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import LoginScreen from '../screens/LoginScreen';
-// import { getItem } from '../utilis/asyncStorage';
-import { View, Text } from 'react-native';
 import ButtomTab from '../ButtonTab/ButtomTab';
 import QuizLevels from '../screens/QuizLevels';
 import QuizInstructionScreen from '../screens/QuizInstructionScreen';
 import QuizScreen from '../screens/QuizScreen';
 import ResultsScreen from '../screens/ResultsScreen';
+import { Text } from 'react-native';
+import LoadingScreen from '../screens/LoadingScreen';
 
 const Stack = createNativeStackNavigator();
 
 const AppNavigation = () => {
-  const isLoggedIn = true; // Set this to the actual value you want to use
-  const initialRoute = isLoggedIn ? 'ButtomTab' : 'Onboarding';
+  const [initialRoute, setInitialRoute] = useState<string | null>(null);
+  const [user, setUser] = useState<User | null>(null);
+  const [isFirstTimeUser, setIsFirstTimeUser] = useState<boolean>(true);
+
+  useEffect(() => {
+    const checkFirstTimeUser = async () => {
+      const onboarded = await AsyncStorage.getItem('onboarded');
+      setIsFirstTimeUser(onboarded !== '1');
+    };
+
+    const unsubscribe = onAuthStateChanged(FIREBASE_AUTH, (currentUser) => {
+      setUser(currentUser);
+      checkFirstTimeUser().then(() => {
+        if (currentUser) {
+          setInitialRoute('ButtomTab');
+        } else if (isFirstTimeUser) {
+          setInitialRoute('Onboarding');
+        } else {
+          setInitialRoute('LogIn');
+        }
+      });
+    });
+
+    return () => unsubscribe();
+  }, [isFirstTimeUser]);
+
+  if (initialRoute === null) {
+    return <LoadingScreen />; // Optionally render a loading screen here
+  }
 
   return (
     <NavigationContainer>

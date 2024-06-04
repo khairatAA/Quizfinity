@@ -9,20 +9,20 @@ import { Timer } from '../../assets/GameScreenIcons'
 import OptionsUI from './OptionsUI'
 import PrimaryButton from '../ui/PrimaryButton'
 
-const {width, height} = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 type GameUIType = {
-    question?: any;
-    style?: any;
-    route: any;
-    currentquestion?: any;
-    totalQuestions?: any;
-    timer?: any;
-    OnPressNext?: any;
-    OnPressBack?: any;
-    options?: any[];
-    onPressOption?: any;
-    ShowResult?: any;
+  question?: any;
+  style?: any;
+  route: any;
+  currentquestion?: any;
+  totalQuestions?: any;
+  timer?: any;
+  OnPressNext?: any;
+  OnPressBack?: any;
+  options?: any[];
+  onPressOption?: any;
+  ShowResult?: any;
 }
 const GameUI = ({ question, style, route,
   currentquestion, totalQuestions, timer, OnPressNext,
@@ -34,7 +34,7 @@ const GameUI = ({ question, style, route,
       <StatusBar style='light' />
       <GameHeader route={route} />
 
-      <View style={[styles.questionContainer, style ]}>
+      <View style={[styles.questionContainer, style]}>
         <View style={styles.questionInfo}>
           <View style={styles.IndexTimeContainer}>
             <Text style={styles.questionIndexandTime}>{currentquestion} of {totalQuestions}</Text>
@@ -45,13 +45,13 @@ const GameUI = ({ question, style, route,
           </View>
         </View>
         <Animated.Text
-        entering={FadeInUp.duration(1000).springify()}
-        style={styles.questionText}
+          entering={FadeInUp.duration(1000).springify()}
+          style={styles.questionText}
         >
           {question}
         </Animated.Text>
       </View>
-      
+
       <View style={styles.optionsContainer}>
         <FlatList
           data={options}
@@ -64,7 +64,7 @@ const GameUI = ({ question, style, route,
           {currentquestion !== 1 && (
             <PrimaryButton style={[styles.button, styles.BackButton]} ButtonText='Back' onPress={OnPressBack} />
           )}
-          
+
           {currentquestion !== totalQuestions ? (
             <PrimaryButton style={styles.button} ButtonText='Next' onPress={OnPressNext} />
           ) : (
@@ -79,11 +79,11 @@ const GameUI = ({ question, style, route,
 export default GameUI
 
 const styles = StyleSheet.create({
-  container:{
+  container: {
     flex: 1,
     backgroundColor: '#614BF2',
   },
-  questionContainer:{
+  questionContainer: {
     backgroundColor: '#614BF2',
     padding: 25,
     width: '100%',

@@ -12,6 +12,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { updateEmail, updatePassword } from 'firebase/auth';
 import { updateDoc, doc, getDoc, deleteDoc } from 'firebase/firestore';
 import AwesomeAlert from 'react-native-awesome-alerts';
+import { removeItem } from '../utilis/asyncStorage'
 
 const { width, height } = Dimensions.get('window');
 
@@ -54,7 +55,8 @@ const Profile = () => {
   const handleSignOut = async () => {
     try {
       await signOut(FIREBASE_AUTH);
-      navigation.navigate('Onboarding');
+      await removeItem('loggedIn');
+      navigation.navigate('LogIn');
     } catch (error) {
       console.log(error);
       Alert.alert('Error', 'Failed to Sign Out. Please try again.');
@@ -200,11 +202,15 @@ const Profile = () => {
           </View>
 
           <Animated.View entering={FadeInDown.delay(800).duration(1000).springify()}>
-            <PrimaryButton onPress={handleSubmit(handleEditProfile)} ButtonText='Update Profile' />
+            <TouchableOpacity style={styles.updateButton} onPress={handleSubmit(handleEditProfile)} >
+              <Text style={styles.updateButtonText}>Update Profile</Text>
+            </TouchableOpacity>
           </Animated.View>
 
           <Animated.View entering={FadeInDown.delay(1000).duration(1000).springify()}>
-            <PrimaryButton onPress={showModal} ButtonText='Delete Account' style={styles.deleteButton} />
+            <TouchableOpacity onPress={showModal} style={styles.deleteButton} >
+              <Text style={styles.deleteButtonText}>Delete Account</Text>
+            </TouchableOpacity>
           </Animated.View>
 
           <View style={{ height: 100 }}>
@@ -287,10 +293,28 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-end'
   },
+  updateButton: {
+    borderWidth: 2,
+    borderColor: '#614BF2',
+    borderRadius: 12,
+    padding: 14,
+  },
+  updateButtonText: {
+    color: '#614BF2',
+    textAlign: 'center',
+    fontFamily: 'OpenSans-Bold',
+    fontSize: 20,
+  },
   deleteButton: {
-    backgroundColor: 'red',
-    marginTop: 50,
+    marginTop: 30,
     marginBottom: 180,
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start'
+  },
+  deleteButtonText: {
+    color: 'red',
+    fontFamily: 'OpenSans-Bold',
+    fontSize: 20,
   },
   modalOverlay: {
     flex: 1,

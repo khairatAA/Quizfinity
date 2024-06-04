@@ -1,41 +1,27 @@
+// asyncStorage.ts
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-type storeItemProps = {
-    key: string;
-    value: string;
-}
-export const storeItem = async ({key, value}: storeItemProps) => {
-    try {
-      await AsyncStorage.setItem(key, value);
-    } catch (e) {
-      console.log('Error storing value: ', e);
-      
-    }
+export const getItem = async (key: string): Promise<string | null> => {
+  try {
+    return await AsyncStorage.getItem(key);
+  } catch (error) {
+    console.error('Error getting item from async storage:', error);
+    return null;
+  }
 };
 
-type getItemProps = {
-    key: string;
-}
-
-export const getItem = async ({key}: getItemProps) => {
-    try {
-      const value = await AsyncStorage.getItem(key);
-      if (value !== null){
-        return value
-      }
-    } catch (e) {
-        console.log('Error retriving value: ', e);
-    }
+export const storeItem = async (key: string, value: string): Promise<void> => {
+  try {
+    await AsyncStorage.setItem(key, value);
+  } catch (error) {
+    console.error('Error storing item in async storage:', error);
+  }
 };
 
-type removeItemProps = {
-    key: string;
-}
-
-export const removeItem = async ({key}: removeItemProps) => {
-    try {
-      await AsyncStorage.removeItem(key);
-    } catch (e) {
-        console.log('Error deleting value: ', e);
-    }
+export const removeItem = async (key: string): Promise<void> => {
+  try {
+    await AsyncStorage.removeItem(key);
+  } catch (error) {
+    console.error('Error removing item from async storage:', error);
+  }
 };

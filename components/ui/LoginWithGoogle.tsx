@@ -3,25 +3,15 @@ import React from 'react'
 import Animated, { FadeIn, FadeInDown, FadeOut } from 'react-native-reanimated';
 
 type LoginWithGoogleType = {
-    InstructionText: string,
-    ActionLink: string,
-    onPress: any,
-    style?: any,
-    handleGoogle?: any
+  InstructionText: string,
+  ActionLink?: string,
+  onPress: any,
+  style?: any,
 }
 
-const LoginWithGoogle = ( {InstructionText, ActionLink, onPress, style, handleGoogle}: LoginWithGoogleType ) => {
+const LoginWithGoogle = ({ InstructionText, ActionLink, onPress, style }: LoginWithGoogleType) => {
   return (
     <View style={[styles.container, style]}>
-      <Animated.Text entering={FadeInDown.delay(600).duration(1000).springify()} style={styles.OrText}>Or</Animated.Text>
-
-      <Animated.View entering={FadeInDown.delay(800).duration(1000).springify()} style={{width: '100%'}}>
-        <TouchableOpacity style={styles.googleButton} onPress={handleGoogle}>
-          <Image source={require('../../assets/icons/search.png')} style={styles.googleIcon} />
-          <Text style={styles.googleButtonText}>Continue with Google</Text>
-        </TouchableOpacity>
-      </Animated.View>
-
       <Animated.Text entering={FadeInDown.delay(1000).duration(1000).springify()} style={styles.Instruction}>{InstructionText} <TouchableOpacity onPress={onPress}><Text style={styles.ActionLink}>{ActionLink}</Text></TouchableOpacity></Animated.Text>
     </View>
   )
@@ -30,13 +20,14 @@ const LoginWithGoogle = ( {InstructionText, ActionLink, onPress, style, handleGo
 export default LoginWithGoogle
 
 const styles = StyleSheet.create({
-  container:{
+  container: {
     flex: 1,
     alignItems: 'center',
     gap: 30,
+    marginTop: 50,
   },
-  OrText:{
-    marginTop:30,
+  OrText: {
+    marginTop: 30,
     fontFamily: 'OpenSans-Bold',
     fontSize: 20,
     color: '#1E1F24'
@@ -53,7 +44,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#B9BBC6',
   },
-  googleButtonText:{
+  googleButtonText: {
     color: '#1E1F24',
     fontFamily: 'OpenSans-Bold',
     fontSize: 16,
@@ -66,10 +57,10 @@ const styles = StyleSheet.create({
     color: '#1E1F24',
     fontFamily: 'OpenSans-Regular',
     flexDirection: 'row',
-    alignItems:"center",
+    alignItems: "center",
     justifyContent: 'center'
   },
-  ActionLink:{
+  ActionLink: {
     color: '#614BF2',
     fontFamily: 'OpenSans-Bold',
   }

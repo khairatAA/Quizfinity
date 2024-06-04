@@ -58,7 +58,7 @@ const UserRanking = () => {
   return (
     <View style={styles.container}>
       <View style={styles.rankingContainer}>
-        <View style={[styles.ranking, styles.rightBorder]}>
+        <View style={[styles.ranking]}>
           <Image source={require('../../assets/icons/cup.png')} style={styles.RankIcon} />
           <View>
             <Text style={styles.rankingText}>Ranking</Text>
@@ -87,6 +87,7 @@ const styles = StyleSheet.create({
   rankingContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-evenly',
     backgroundColor: Colors.light.primary100,
     borderRadius: 10,
     height: 120,
@@ -96,15 +97,10 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     elevation: 5,
   },
-  rightBorder: {
-    borderRightWidth: 1,
-    borderRightColor: '#D8D9E0'
-  },
   ranking: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingRight: 5,
   },
   rankingText: {
     color: '#62636C',
@@ -112,11 +108,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   RankIcon: {
-    width: 100,
+    width: 50,
     height: 50,
   },
   PointsIcon: {
-    width: 100,
+    width: 50,
     height: 50,
   },
   score: {
