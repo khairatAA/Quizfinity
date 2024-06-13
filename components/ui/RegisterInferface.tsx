@@ -6,26 +6,26 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { AntDesign } from '@expo/vector-icons';
 import Animated, { FadeIn, FadeInUp, FadeOut } from 'react-native-reanimated';
 
-const {width, height} = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 type RegisterInterfaceType = {
-    onPress?: any;
-    title: string;
-    children: any;
-    style?: any;
+  onPress?: any;
+  title: string;
+  children: any;
+  style?: any;
 }
 const RegisterInterface = ({ onPress, title, children, style }: RegisterInterfaceType) => {
 
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style='auto' />
-      <View style={[styles.titleContainer, style ]}>
+      <View style={[styles.titleContainer, style]}>
         <TouchableOpacity onPress={onPress} style={styles.iconContainer}>
-            <AntDesign name="arrowleft" size={28} color="#614BF2" />
+          <AntDesign name="arrowleft" size={28} color="#614BF2" />
         </TouchableOpacity>
         <Animated.Text entering={FadeInUp.duration(1000).springify()} style={styles.titleText}>{title}</Animated.Text>
       </View>
-      
+
       <View style={styles.form}>
         {children}
       </View>
@@ -36,11 +36,11 @@ const RegisterInterface = ({ onPress, title, children, style }: RegisterInterfac
 export default RegisterInterface
 
 const styles = StyleSheet.create({
-  container:{
+  container: {
     flex: 1,
     backgroundColor: '#614BF2',
   },
-  titleContainer:{
+  titleContainer: {
     backgroundColor: '#614BF2',
     height: width * 0.5,
     padding: 25,
@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
     fontSize: 40,
     color: Colors.light.primary100,
     alignSelf: 'center',
+    textAlign: 'center',
   },
   form: {
     backgroundColor: Colors.light.primary100,

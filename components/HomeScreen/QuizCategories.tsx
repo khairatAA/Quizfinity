@@ -1,102 +1,115 @@
-import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Dimensions, FlatList } from 'react-native'
-import React, { useEffect } from 'react'
-import { quizCategoriesArray } from './QuizCategoryArray'
-import Colors from '../../constants/Colors';
-import Animated, { FadeInDown, FadeInUp, ZoomInLeft } from 'react-native-reanimated';
-import { useNavigation } from '@react-navigation/native';
+import {
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+  StyleSheet,
+  Dimensions,
+  FlatList,
+} from "react-native";
+import React, { useEffect } from "react";
+import { quizCategoriesArray } from "./QuizCategoryArray";
+import Colors from "../../constants/Colors";
+import Animated, {
+  FadeInDown,
+  FadeInUp,
+  ZoomInLeft,
+} from "react-native-reanimated";
+import { useNavigation } from "@react-navigation/native";
 
-const { width } = Dimensions.get('window');
+const { width } = Dimensions.get("window");
 
 const QuizCategories = () => {
-    const navigation = useNavigation()
+  const navigation = useNavigation();
 
-    const renderItem = ({ item }: any) => {
-
-        return (
-            <Animated.View entering={ZoomInLeft.duration(1000).delay(300 * item.id)} style={styles.categoryContainer}>
-                <TouchableOpacity
-                    key={item.id}
-                    onPress={
-                        () => {
-                            navigation.navigate(
-                                'QuizLevels',
-                                { category: item.name, numberOfLevels: item.numberOfLevels, levelDetails: item.levelDetails }
-                            )
-                        }}
-                >
-                    <View style={styles.CategoryImage}>
-                        {item.image}
-                    </View>
-                    <View style={styles.CategoryTexts}>
-                        <Text style={styles.CategoryName}>{item.name}</Text>
-                        <Text style={styles.CategoryLevel}>{item.numberOfLevels} Levels</Text>
-                    </View>
-                </TouchableOpacity>
-            </Animated.View>
-        )
-    };
-
+  const renderItem = ({ item }: any) => {
     return (
-        <View style={styles.container}>
-            <Text style={styles.LetPlay}>Let's Play</Text>
-            <FlatList
-                data={quizCategoriesArray}
-                renderItem={renderItem}
-                keyExtractor={item => item.id.toString()}
-                contentContainerStyle={styles.categoriesContainer}
-                numColumns={2}
-            />
-        </View>
-    )
-}
+      <Animated.View
+        entering={ZoomInLeft.duration(1000).delay(300 * item.id)}
+        style={styles.categoryContainer}
+      >
+        <TouchableOpacity
+          key={item.id}
+          onPress={() => {
+            navigation.navigate("QuizLevels", {
+              category: item.name,
+              numberOfLevels: item.numberOfLevels,
+              levelDetails: item.levelDetails,
+            });
+          }}
+        >
+          <View style={styles.CategoryImage}>{item.image}</View>
+          <View style={styles.CategoryTexts}>
+            <Text style={styles.CategoryName}>{item.name}</Text>
+            <Text style={styles.CategoryLevel}>
+              {item.numberOfLevels} Levels
+            </Text>
+          </View>
+        </TouchableOpacity>
+      </Animated.View>
+    );
+  };
 
-export default QuizCategories
+  return (
+    <View style={styles.container}>
+      <Text style={styles.LetPlay}>Let's Play</Text>
+      <FlatList
+        data={quizCategoriesArray}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id.toString()}
+        contentContainerStyle={styles.categoriesContainer}
+        numColumns={2}
+      />
+    </View>
+  );
+};
+
+export default QuizCategories;
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        gap: 20,
-    },
-    CategoryImage: {
-        alignSelf: 'center',
-        position: 'relative',
-        top: -35,
-    },
-    LetPlay: {
-        paddingHorizontal: 20,
-        fontFamily: 'OpenSans-Bold',
-        fontSize: 20,
-    },
-    categoriesContainer: {
-        justifyContent: 'space-between',
-        paddingHorizontal: 10,
-        paddingBottom: 100
-    },
-    categoryContainer: {
-        flex: 1,
-        marginVertical: 20,
-        marginHorizontal: 10,
-        paddingHorizontal: 20,
-        paddingBottom: 30,
-        backgroundColor: Colors.light.primary100,
-        borderRadius: 10,
-        shadowColor: 'black',
-        shadowOffset: { width: 0, height: 1 },
-        shadowOpacity: 0.2,
-        shadowRadius: 2,
-        elevation: 5,
-    },
-    CategoryTexts: {
-        gap: 5,
-    },
-    CategoryName: {
-        fontFamily: 'OpenSans-Bold',
-        fontSize: 18,
-    },
-    CategoryLevel: {
-        color: '#62636C',
-        fontFamily: 'OpenSans-SemiBold',
-        fontSize: 16,
-    }
-
-})
+  container: {
+    flex: 1,
+    gap: 20,
+  },
+  CategoryImage: {
+    alignSelf: "center",
+    position: "relative",
+    top: -35,
+  },
+  LetPlay: {
+    paddingHorizontal: 20,
+    fontFamily: "OpenSans-Bold",
+    fontSize: 20,
+  },
+  categoriesContainer: {
+    justifyContent: "space-between",
+    paddingHorizontal: 10,
+    paddingBottom: 10,
+  },
+  categoryContainer: {
+    flex: 1,
+    marginVertical: 20,
+    marginHorizontal: 10,
+    paddingHorizontal: 20,
+    paddingBottom: 30,
+    backgroundColor: Colors.light.primary100,
+    borderRadius: 10,
+    shadowColor: "black",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
+    elevation: 5,
+  },
+  CategoryTexts: {
+    gap: 5,
+  },
+  CategoryName: {
+    fontFamily: "OpenSans-Bold",
+    fontSize: 18,
+  },
+  CategoryLevel: {
+    color: "#62636C",
+    fontFamily: "OpenSans-SemiBold",
+    fontSize: 16,
+  },
+});

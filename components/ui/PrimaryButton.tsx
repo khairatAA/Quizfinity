@@ -7,7 +7,7 @@ type PrimaryButtonTypes = {
   onPress: any;
   style?: any
 }
-const PrimaryButton = ({ButtonText, onPress, style}: PrimaryButtonTypes) => {
+const PrimaryButton = ({ ButtonText, onPress, style }: PrimaryButtonTypes) => {
   return (
     <TouchableOpacity style={[styles.container, style]} onPress={onPress} >
       <Text style={styles.ButtonText}>{ButtonText}</Text>
@@ -23,8 +23,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#614BF2',
     padding: 15,
     borderRadius: 20,
-    elevation: 8,
-    shadowOpacity: 0.2,
+    // elevation: 3,
+    // shadowOpacity: 0.2,
+    shadowColor: "#000000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.17,
+    shadowRadius: 2.54,
+    elevation: 3
   },
   ButtonText: {
     fontFamily: 'OpenSans-Bold',

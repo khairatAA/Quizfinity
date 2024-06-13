@@ -1,16 +1,16 @@
-import {Pressable, StyleSheet, Text, View} from 'react-native';
-import React, {FC, useEffect} from 'react';
+import { Pressable, StyleSheet, Text, View } from "react-native";
+import React, { FC, useEffect } from "react";
 import Animated, {
   useAnimatedProps,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
-} from 'react-native-reanimated';
-import Feather from 'react-native-vector-icons/Feather';
-import { getPathXCenterByIndex } from '../../../utilis/Path';
-import usePath from '../../../hooks/usePath';
-import {SCREEN_WIDTH} from '../../../constants/Screen';
-import Colors from '../../../constants/Colors';
+} from "react-native-reanimated";
+import Feather from "react-native-vector-icons/Feather";
+import { getPathXCenterByIndex } from "../../../utilis/Path";
+import usePath from "../../../hooks/usePath";
+import { SCREEN_WIDTH } from "../../../constants/Screen";
+import Colors from "../../../constants/Colors";
 export type TabProps = {
   label: string;
   icon: string;
@@ -28,7 +28,7 @@ const TabItem: FC<TabProps> = ({
   activeIndex,
   onTabPress,
 }) => {
-  const {curvedPaths} = usePath();
+  const { curvedPaths } = usePath();
   const animatedActiveIndex = useSharedValue(activeIndex);
   const iconPosition = getPathXCenterByIndex(curvedPaths, index);
   const labelPosition = getPathXCenterByIndex(curvedPaths, index);
@@ -40,8 +40,8 @@ const TabItem: FC<TabProps> = ({
       width: ICON_SIZE,
       height: ICON_SIZE,
       transform: [
-        {translateY: withTiming(translateY)},
-        {translateX: iconPositionX - ICON_SIZE / 2},
+        { translateY: withTiming(translateY) },
+        { translateX: iconPositionX - ICON_SIZE / 2 },
       ],
     };
   });
@@ -49,22 +49,22 @@ const TabItem: FC<TabProps> = ({
     const translateY = animatedActiveIndex.value - 1 === index ? 36 : 100;
     return {
       transform: [
-        {translateY: withTiming(translateY)},
-        {translateX: labelPosition - LABEL_WIDTH / 2},
+        { translateY: withTiming(translateY) },
+        { translateX: labelPosition - LABEL_WIDTH / 2 },
       ],
     };
   });
   const iconColor = useSharedValue(
-    activeIndex === index + 1 ? '#F7F8FF' : '#F7F8FF',
+    activeIndex === index + 1 ? "#F7F8FF" : "#F7F8FF"
   );
 
   //Adjust Icon color for this first render
   useEffect(() => {
     animatedActiveIndex.value = activeIndex;
     if (activeIndex === index + 1) {
-      iconColor.value = withTiming('#F7F8FF');
+      iconColor.value = withTiming("#F7F8FF");
     } else {
-      iconColor.value = withTiming('#F7F8FF');
+      iconColor.value = withTiming("#F7F8FF");
     }
   }, [activeIndex]);
 
@@ -77,8 +77,9 @@ const TabItem: FC<TabProps> = ({
         <Pressable
           testID={`tab${label}`}
           //Increasing touchable Area
-          hitSlop={{top: 30, bottom: 30, left: 50, right: 50}}
-          onPress={onTabPress}>
+          hitSlop={{ top: 30, bottom: 30, left: 50, right: 50 }}
+          onPress={onTabPress}
+        >
           <AnimatedIcon
             name={icon}
             size={25}
@@ -97,8 +98,8 @@ export default TabItem;
 
 const styles = StyleSheet.create({
   labelContainer: {
-    position: 'absolute',
-    alignItems: 'center',
+    position: "absolute",
+    alignItems: "center",
     width: LABEL_WIDTH,
   },
   label: {
