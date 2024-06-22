@@ -35,7 +35,6 @@
     "react-hook-form": "^7.51.3",
     "react-native": "^0.74.2",
     "react-native-awesome-alerts": "^2.0.0",
-    "react-native-keychain": "^8.2.0",
     "react-native-modal": "^13.0.1",
     "react-native-onboarding-swiper": "^1.2.0",
     "react-native-reanimated": "~3.10.1",
