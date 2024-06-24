@@ -239,6 +239,10 @@ const GameInterface = ({ route }: any) => {
           setShowAlert(false);
           navigation.goBack();
         }}
+        onDismiss={() => {
+          setShowAlert(false);
+          navigation.goBack();
+        }}
       />
     </View>
   );
