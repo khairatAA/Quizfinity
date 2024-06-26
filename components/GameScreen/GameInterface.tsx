@@ -51,9 +51,7 @@ const GameInterface = ({ route }: any) => {
   const [options, setOptions] = useState<string[]>([]);
   const [timer, setTimer] = useState(getInitialTime(difficulty));
   const [score, setScore] = useState(0);
-  const [answeredCorrectly, setAnsweredCorrectly] = useState<boolean>(false);
-  const [correctAnswers, setCorrectAnswers] = useState(0);
-  const [wrongAnswers, setWrongAnswers] = useState(0);
+  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
@@ -114,18 +112,13 @@ const GameInterface = ({ route }: any) => {
     setLoading(false);
   };
 
-  const generateOptionsAndShuffle = (_question: Question) => {
-    const options = [..._question.incorrect_answers];
-    options.push(_question.correct_answer);
-
+  const generateOptionsAndShuffle = (question: Question) => {
+    const options = [...question.incorrect_answers, question.correct_answer];
     shuffleArray(options);
-
     return options;
   };
 
   const handleNextPress = () => {
-    setAnsweredCorrectly(false);
-
     if (currentQuestionIndex + 1 < questions.length) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
       setOptions(
@@ -137,33 +130,26 @@ const GameInterface = ({ route }: any) => {
   };
 
   const handleBackPress = () => {
-    setAnsweredCorrectly(false);
-
     if (currentQuestionIndex > 0) {
-      setCurrentQuestionIndex(currentQuestionIndex - 1); // Decrement the current question index
+      setCurrentQuestionIndex(currentQuestionIndex - 1);
       setOptions(
         generateOptionsAndShuffle(questions[currentQuestionIndex - 1])
-      ); // Use the previous question index
+      );
     }
   };
 
-  const handleSelectedOption = async (_option: string) => {
-    const option = decodeURIComponent(_option);
-
-    const correctOption = decodeURIComponent(
+  const handleSelectedOption = (option: string) => {
+    const decodedOption = decodeURIComponent(option);
+    const decodedCorrectOption = decodeURIComponent(
       questions[currentQuestionIndex].correct_answer
     );
-    const isCorrect = option === correctOption;
 
-    if (isCorrect && !answeredCorrectly) {
+    const newSelectedOptions = [...selectedOptions];
+    newSelectedOptions[currentQuestionIndex] = decodedOption;
+    setSelectedOptions(newSelectedOptions);
+
+    if (decodedOption === decodedCorrectOption) {
       setScore((prevScore) => prevScore + 10);
-      setCorrectAnswers((prev) => prev + 1);
-      setAnsweredCorrectly(true);
-    } else if (!isCorrect && answeredCorrectly) {
-      setWrongAnswers((prev) => prev + 1);
-      setAnsweredCorrectly(false);
-    } else if (!isCorrect) {
-      setWrongAnswers((prev) => prev + 1);
     }
 
     if (currentQuestionIndex + 1 < questions.length) {
@@ -171,18 +157,35 @@ const GameInterface = ({ route }: any) => {
       setOptions(
         generateOptionsAndShuffle(questions[currentQuestionIndex + 1])
       );
-      setAnsweredCorrectly(false);
+    } else {
+      handleResultPress();
     }
   };
 
   const handleResultPress = () => {
     const totalTimeUsed = getInitialTime(difficulty) - timer;
+    const correctAnswers = selectedOptions.filter(
+      (option, index) =>
+        decodeURIComponent(option) ===
+        decodeURIComponent(questions[index].correct_answer)
+    ).length;
+    const wrongAnswers = selectedOptions.filter(
+      (option, index) =>
+        option !== undefined &&
+        decodeURIComponent(option) !==
+          decodeURIComponent(questions[index].correct_answer)
+    ).length;
+    const skippedAnswers = selectedOptions.filter(
+      (option) => option === undefined
+    ).length;
+
     navigation.navigate("ResultScreen", {
       levelNumber,
       category,
       score,
       correctAnswers,
       wrongAnswers,
+      skippedAnswers,
       totalQuestions: questions.length,
       timeUsed: totalTimeUsed,
     });
@@ -223,6 +226,7 @@ const GameInterface = ({ route }: any) => {
         onPressOption={handleSelectedOption}
         OnPressBack={handleBackPress}
         ShowResult={handleResultPress}
+        selectedOption={selectedOptions[currentQuestionIndex]}
       />
 
       <AwesomeAlert
