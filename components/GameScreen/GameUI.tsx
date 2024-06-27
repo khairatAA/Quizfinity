@@ -7,7 +7,8 @@ import {
   ScrollView,
   FlatList,
 } from "react-native";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { Audio } from "expo-av";
 import Colors from "../../constants/Colors";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -47,6 +48,87 @@ const GameUI = ({
   ShowResult,
   selectedOption,
 }: GameUIType) => {
+  const sound = useRef<Audio.Sound | null>(null);
+  const [hasAudioPermission, setHasAudioPermission] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  useEffect(() => {
+    const getPermission = async () => {
+      const { granted } = await Audio.requestPermissionsAsync();
+      setHasAudioPermission(granted);
+    };
+
+    getPermission();
+
+    const loadSound = async () => {
+      if (hasAudioPermission) {
+        const { sound: loadedSound } = await Audio.Sound.createAsync(
+          require("../../assets/Audio/TickingTimerSound.mp3") // Replace with the path to your sound file
+        );
+        sound.current = loadedSound;
+      }
+    };
+
+    loadSound();
+
+    return () => {
+      if (sound.current) {
+        sound.current.unloadAsync();
+      }
+    };
+  }, [hasAudioPermission]);
+
+  useEffect(() => {
+    const playSound = async () => {
+      if (sound.current && parseInt(timer.split(":")[0]) <= 1 && !isPlaying) {
+        await sound.current.setIsLoopingAsync(true);
+        await sound.current.playAsync();
+        setIsPlaying(true);
+      }
+    };
+
+    const stopSound = async () => {
+      if (sound.current && isPlaying) {
+        await sound.current.stopAsync();
+        setIsPlaying(false);
+      }
+    };
+
+    if (parseInt(timer.split(":")[0]) <= 1) {
+      playSound();
+    } else {
+      stopSound();
+    }
+
+    return () => {
+      stopSound();
+    };
+  }, [timer]);
+
+  useEffect(() => {
+    return () => {
+      if (sound.current) {
+        sound.current.stopAsync();
+      }
+    };
+  }, []);
+
+  const handlePressNext = () => {
+    if (currentquestion === totalQuestions - 1) {
+      if (sound.current) {
+        sound.current.stopAsync();
+      }
+    }
+    OnPressNext();
+  };
+
+  const handleShowResult = () => {
+    if (sound.current) {
+      sound.current.stopAsync();
+    }
+    ShowResult();
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="light" />
@@ -108,13 +190,13 @@ const GameUI = ({
             <PrimaryButton
               style={styles.button}
               ButtonText="Next"
-              onPress={OnPressNext}
+              onPress={handlePressNext}
             />
           ) : (
             <PrimaryButton
               style={styles.button}
               ButtonText="Result"
-              onPress={ShowResult}
+              onPress={handleShowResult}
             />
           )}
         </View>
