@@ -51,11 +51,14 @@ const GameInterface = ({ route }: any) => {
   const [options, setOptions] = useState<string[]>([]);
   const [timer, setTimer] = useState(getInitialTime(difficulty));
   const [score, setScore] = useState(0);
-  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+  const [selectedOptions, setSelectedOptions] = useState<
+    (string | undefined)[]
+  >([]);
   const [loading, setLoading] = useState(true);
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [alertTitle, setAlertTitle] = useState("");
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -125,7 +128,7 @@ const GameInterface = ({ route }: any) => {
         generateOptionsAndShuffle(questions[currentQuestionIndex + 1])
       );
     } else {
-      handleResultPress();
+      setShowConfirmModal(true);
     }
   };
 
@@ -158,7 +161,7 @@ const GameInterface = ({ route }: any) => {
         generateOptionsAndShuffle(questions[currentQuestionIndex + 1])
       );
     } else {
-      handleResultPress();
+      setShowConfirmModal(true);
     }
   };
 
@@ -166,8 +169,9 @@ const GameInterface = ({ route }: any) => {
     const totalTimeUsed = getInitialTime(difficulty) - timer;
     const correctAnswers = selectedOptions.filter(
       (option, index) =>
+        option !== undefined &&
         decodeURIComponent(option) ===
-        decodeURIComponent(questions[index].correct_answer)
+          decodeURIComponent(questions[index].correct_answer)
     ).length;
     const wrongAnswers = selectedOptions.filter(
       (option, index) =>
@@ -175,9 +179,7 @@ const GameInterface = ({ route }: any) => {
         decodeURIComponent(option) !==
           decodeURIComponent(questions[index].correct_answer)
     ).length;
-    const skippedAnswers = selectedOptions.filter(
-      (option) => option === undefined
-    ).length;
+    const skippedAnswers = questions.length - (correctAnswers + wrongAnswers);
 
     navigation.navigate("ResultScreen", {
       levelNumber,
@@ -189,6 +191,15 @@ const GameInterface = ({ route }: any) => {
       totalQuestions: questions.length,
       timeUsed: totalTimeUsed,
     });
+  };
+
+  const handleConfirmSubmit = () => {
+    setShowConfirmModal(false);
+    handleResultPress();
+  };
+
+  const handleCancelSubmit = () => {
+    setShowConfirmModal(false);
   };
 
   if (loading) {
@@ -225,7 +236,7 @@ const GameInterface = ({ route }: any) => {
         options={options}
         onPressOption={handleSelectedOption}
         OnPressBack={handleBackPress}
-        ShowResult={handleResultPress}
+        ShowResult={handleNextPress}
         selectedOption={selectedOptions[currentQuestionIndex]}
       />
 
@@ -247,6 +258,23 @@ const GameInterface = ({ route }: any) => {
           setShowAlert(false);
           navigation.goBack();
         }}
+      />
+
+      <AwesomeAlert
+        show={showConfirmModal}
+        showProgress={false}
+        title="Confirm Submission"
+        message="Are you sure you want to submit your answers?"
+        closeOnTouchOutside={false}
+        closeOnHardwareBackPress={false}
+        showCancelButton={true}
+        showConfirmButton={true}
+        confirmText="Yes, Submit"
+        cancelText="No"
+        confirmButtonColor="#DD6B55"
+        cancelButtonColor="#80828D"
+        onConfirmPressed={handleConfirmSubmit}
+        onCancelPressed={handleCancelSubmit}
       />
     </View>
   );

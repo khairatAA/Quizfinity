@@ -90,7 +90,12 @@ const GameUI = ({
           )}
           keyExtractor={(item, index) => index.toString()}
         />
-        <View style={styles.buttonContainer}>
+        <View
+          style={[
+            styles.buttonContainer,
+            currentquestion === 1 && styles.nextButton,
+          ]}
+        >
           {currentquestion !== 1 && (
             <PrimaryButton
               style={[styles.button, styles.BackButton]}
@@ -179,6 +184,9 @@ const styles = StyleSheet.create({
   },
   button: {
     width: "45%",
+  },
+  nextButton: {
+    justifyContent: "flex-end",
   },
   BackButton: {
     backgroundColor: "#80828D",

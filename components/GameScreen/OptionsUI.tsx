@@ -14,7 +14,11 @@ const OptionsUI = ({ option, onPress, selected }: OptionsUIType) => {
       onPress={onPress}
       style={[styles.container, selected && styles.selectedOption]}
     >
-      <Text style={styles.singleOption}>{option}</Text>
+      <Text
+        style={[styles.singleOption, selected && styles.selectedOptionText]}
+      >
+        {option}
+      </Text>
     </TouchableOpacity>
   );
 };
@@ -31,7 +35,12 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   selectedOption: {
-    backgroundColor: Colors.light.primary200, // Change color to indicate selection
+    backgroundColor: Colors.light.primary200,
+    borderWidth: 1,
+    borderColor: Colors.light.primary600,
+  },
+  selectedOptionText: {
+    color: Colors.light.primary600,
   },
   singleOption: {
     color: "#1E1F24",

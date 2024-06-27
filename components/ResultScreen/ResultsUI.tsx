@@ -41,9 +41,7 @@ const ResultsUI = ({
   totalQuestions,
   skippedAnswers,
 }: ResultsUITypes) => {
-  const percentage =
-    (correctAnswers ? Math.floor((correctAnswers / totalQuestions) * 100) : 0) +
-    "%";
+  const percentage = (score ? Math.floor((score / 150) * 100) : 0) + "%";
 
   return (
     <SafeAreaView style={styles.container}>
@@ -70,56 +68,61 @@ const ResultsUI = ({
       </View>
 
       <View style={styles.detailsContainer}>
-        <View style={styles.ResultDetails}>
-          <View>
-            <ResultDetail
-              value={percentage}
-              title="Completed"
-              bulletStyle={styles.CompletedbulletStyle}
-            />
-            <ResultDetail
-              value={
-                correctAnswers && correctAnswers <= 9
-                  ? "0" + correctAnswers
-                  : correctAnswers
-              }
-              title="Correct"
-              bulletStyle={styles.correctAnswersbulletStyle}
-            />
+        <ScrollView>
+          <View style={styles.ResultDetails}>
+            <View style={styles.ResultGroup}>
+              <ResultDetail
+                value={percentage}
+                title="Percentage"
+                bulletStyle={styles.CompletedbulletStyle}
+              />
+              <ResultDetail
+                value={
+                  correctAnswers && correctAnswers <= 9
+                    ? "0" + correctAnswers
+                    : correctAnswers
+                }
+                title="Correct"
+                bulletStyle={styles.correctAnswersbulletStyle}
+              />
+              <ResultDetail
+                value={
+                  wrongAnswers && wrongAnswers <= 9
+                    ? "0" + wrongAnswers
+                    : wrongAnswers
+                }
+                title="Wrong"
+                bulletStyle={styles.wrongAnswersbulletStyle}
+              />
+            </View>
+
+            <View style={styles.ResultGroup}>
+              <ResultDetail
+                value={score}
+                title="Points Earned"
+                bulletStyle={styles.CompletedbulletStyle}
+              />
+              <ResultDetail
+                value={
+                  timeUsed && timeUsed < 60
+                    ? formatTime(timeUsed) + " secs"
+                    : formatTime(timeUsed) + " mins"
+                }
+                title="Time Used"
+                bulletStyle={styles.correctAnswersbulletStyle}
+              />
+              <ResultDetail
+                value={
+                  skippedAnswers && skippedAnswers <= 9
+                    ? "0" + skippedAnswers
+                    : skippedAnswers
+                }
+                title="Skipped"
+                bulletStyle={styles.wrongAnswersbulletStyle}
+              />
+            </View>
           </View>
-          <View>
-            <ResultDetail
-              value={
-                timeUsed && timeUsed < 60
-                  ? formatTime(timeUsed) + " secs"
-                  : formatTime(timeUsed) + " mins"
-              }
-              title="Time Used"
-              bulletStyle={styles.CompletedbulletStyle}
-            />
-            <ResultDetail
-              value={
-                wrongAnswers && wrongAnswers <= 9
-                  ? "0" + wrongAnswers
-                  : wrongAnswers
-              }
-              title="Wrong"
-              bulletStyle={styles.wrongAnswersbulletStyle}
-            />
-          </View>
-          {/* skippedAnswers */}
-          <View>
-            <ResultDetail
-              value={
-                skippedAnswers && skippedAnswers <= 9
-                  ? "0" + skippedAnswers
-                  : skippedAnswers
-              }
-              title="Skipped"
-              bulletStyle={styles.wrongAnswersbulletStyle}
-            />
-          </View>
-        </View>
+        </ScrollView>
         <View>
           <PrimaryButton ButtonText="Home" onPress={OnPressBack} />
         </View>
@@ -194,16 +197,17 @@ const styles = StyleSheet.create({
     padding: 25,
     paddingTop: 40,
     flex: 1,
-    justifyContent: "space-between",
   },
   ResultDetails: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
     padding: 20,
     borderRadius: 12,
     borderWidth: 1,
     borderColor: "#614BF2",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  ResultGroup: {
+    flexDirection: "column",
   },
   CompletedbulletStyle: {
     color: "#614BF2",
